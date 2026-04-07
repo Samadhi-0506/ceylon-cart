@@ -4,23 +4,21 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { ThemeProvider } from './context/ThemeContext';
 
-// User pages
-import HomePage from './pages/HomePage';
-import ShopPage from './pages/ShopPage';
-import ProductPage from './pages/ProductPage';
-import CartPage from './pages/CartPage';
-import CheckoutPage from './pages/CheckoutPage';
-import OrdersPage from './pages/OrdersPage';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
+import HomePage        from './pages/HomePage';
+import ShopPage        from './pages/ShopPage';
+import ProductPage     from './pages/ProductPage';
+import CartPage        from './pages/CartPage';
+import CheckoutPage    from './pages/CheckoutPage';
+import OrdersPage      from './pages/OrdersPage';
+import LoginPage       from './pages/LoginPage';
+import AuthCallbackPage from './pages/AuthCallbackPage';
 
-// Admin pages
-import AdminLayout from './pages/admin/AdminLayout';
-import AdminDashboard from './pages/admin/AdminDashboard';
-import AdminProducts from './pages/admin/AdminProducts';
+import AdminLayout     from './pages/admin/AdminLayout';
+import AdminDashboard  from './pages/admin/AdminDashboard';
+import AdminProducts   from './pages/admin/AdminProducts';
 import AdminCategories from './pages/admin/AdminCategories';
-import AdminOrders from './pages/admin/AdminOrders';
-import AdminUsers from './pages/admin/AdminUsers';
+import AdminOrders     from './pages/admin/AdminOrders';
+import AdminUsers      from './pages/admin/AdminUsers';
 
 const AdminRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, loading } = useAuth();
@@ -43,26 +41,24 @@ function App() {
         <CartProvider>
           <BrowserRouter>
             <Routes>
-              {/* Public user routes */}
-              <Route path="/" element={<HomePage />} />
-              <Route path="/shop" element={<ShopPage />} />
+              <Route path="/"                element={<HomePage />} />
+              <Route path="/shop"            element={<ShopPage />} />
               <Route path="/shop/:categorySlug" element={<ShopPage />} />
-              <Route path="/product/:id" element={<ProductPage />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/product/:id"     element={<ProductPage />} />
+              <Route path="/cart"            element={<CartPage />} />
+              <Route path="/login"           element={<LoginPage />} />
+              <Route path="/register"        element={<LoginPage />} />
+              <Route path="/auth/callback"   element={<AuthCallbackPage />} />
 
-              {/* Protected user routes */}
               <Route path="/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
-              <Route path="/orders" element={<ProtectedRoute><OrdersPage /></ProtectedRoute>} />
+              <Route path="/orders"   element={<ProtectedRoute><OrdersPage /></ProtectedRoute>} />
 
-              {/* Admin routes */}
               <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
-                <Route index element={<AdminDashboard />} />
-                <Route path="products" element={<AdminProducts />} />
+                <Route index             element={<AdminDashboard />} />
+                <Route path="products"   element={<AdminProducts />} />
                 <Route path="categories" element={<AdminCategories />} />
-                <Route path="orders" element={<AdminOrders />} />
-                <Route path="users" element={<AdminUsers />} />
+                <Route path="orders"     element={<AdminOrders />} />
+                <Route path="users"      element={<AdminUsers />} />
               </Route>
 
               <Route path="*" element={<Navigate to="/" replace />} />

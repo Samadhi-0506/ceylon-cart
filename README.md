@@ -39,23 +39,6 @@ ceylon-cart/
 
 ---
 
-### STEP 1 — Create GitHub Repository
-
-1. Go to https://github.com and sign in (or create an account)
-2. Click **"New"** → Name it `ceylon-cart`
-3. Set to **Public** or **Private**, click **"Create repository"**
-4. Open **VS Code terminal** (Ctrl+` or View → Terminal)
-
-```bash
-# Navigate to where you want the project
-cd Desktop
-
-# Clone the empty repo
-git clone https://github.com/YOUR_USERNAME/ceylon-cart.git
-cd ceylon-cart
-```
-
----
 
 ### STEP 2 — Copy Project Files
 
@@ -77,22 +60,6 @@ Copy all the provided files into the `ceylon-cart` folder maintaining the struct
 ### STEP 4 — Backend Setup
 
 ```bash
-cd backend
-npm install
-
-# Create environment file
-cp .env.example .env
-```
-
-Edit `.env` and fill in:
-```
-MONGO_URI=mongodb+srv://YOUR_USER:YOUR_PASS@cluster0.xxxxx.mongodb.net/ceyloncart
-JWT_SECRET=your_super_secret_key_change_this_123
-PORT=5000
-NODE_ENV=development
-```
-
-```bash
 # Seed the database with sample Sri Lankan products
 npm run seed
 
@@ -105,15 +72,6 @@ Backend runs on: http://localhost:5000
 ---
 
 ### STEP 5 — Frontend Setup
-
-```bash
-# In a new terminal tab
-cd frontend
-npm install
-
-# Create environment file
-cp .env.example .env
-```
 
 `.env` should contain:
 ```
@@ -139,17 +97,6 @@ Open http://localhost:5173
 **Test user credentials**:
 - Email: `user@ceyloncart.lk`
 - Password: `User@123`
-
----
-
-### STEP 7 — Push to GitHub
-
-```bash
-cd ..  # back to root ceylon-cart/
-git add .
-git commit -m "feat: initial CeylonCart full-stack application"
-git push origin main
-```
 
 ---
 
