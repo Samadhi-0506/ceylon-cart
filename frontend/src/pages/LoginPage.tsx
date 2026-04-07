@@ -219,19 +219,6 @@ const LoginPage = () => {
                   className="w-full bg-gradient-to-r from-ceylon-500 to-amber-500 text-white font-bold py-3.5 rounded-2xl hover:opacity-90 transition-opacity active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2">
                   {loading ? <><div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" /> Signing in...</> : 'Sign In'}
                 </button>
-
-                {/* Demo accounts */}
-                <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-3 text-xs">
-                  <p className="font-semibold text-amber-400 mb-1.5">🧪 Demo Accounts — click to fill:</p>
-                  <button type="button" onClick={() => { setEmail('admin@ceyloncart.lk'); setPassword('Admin@123'); }}
-                    className="block text-amber-400/80 hover:text-amber-400 hover:underline transition-colors w-full text-left">
-                    ⚙️ Admin: admin@ceyloncart.lk / Admin@123
-                  </button>
-                  <button type="button" onClick={() => { setEmail('user@ceyloncart.lk'); setPassword('User@123'); }}
-                    className="block text-amber-400/80 hover:text-amber-400 hover:underline transition-colors mt-0.5 w-full text-left">
-                    👤 User: user@ceyloncart.lk / User@123
-                  </button>
-                </div>
               </form>
             )}
 
@@ -313,6 +300,7 @@ const LoginPage = () => {
               </button>
 
               {/* Facebook */}
+              {tab === 'signin' && (
               <button onClick={handleFacebook}
                 className="w-full flex items-center justify-center gap-3 bg-[#2a2a2a] hover:bg-[#333] border border-white/10 hover:border-white/20 text-white font-medium py-3.5 rounded-2xl transition-all active:scale-95">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="#1877F2">
@@ -320,8 +308,10 @@ const LoginPage = () => {
                 </svg>
                 Continue with Facebook
               </button>
+              )}
 
               {/* Passkey */}
+              {tab === 'signin' && (
               <button onClick={handlePasskeyLogin} disabled={passkeyLoading}
                 className="w-full flex items-center justify-center gap-3 bg-[#2a2a2a] hover:bg-[#333] border border-white/10 hover:border-white/20 text-white font-medium py-3.5 rounded-2xl transition-all active:scale-95 disabled:opacity-50">
                 {passkeyLoading ? (
@@ -331,15 +321,8 @@ const LoginPage = () => {
                 )}
                 {passkeyLoading ? 'Waiting for passkey...' : 'Sign In with Passkey'}
               </button>
+              )}
             </div>
-
-            {/* Admin shortcut */}
-            <p className="text-center text-xs text-gray-600 mt-6">
-              Admin?{' '}
-              <Link to="/admin" className="text-ceylon-400 hover:text-ceylon-300 font-medium transition-colors">
-                Go to Admin Panel →
-              </Link>
-            </p>
           </div>
         </div>
       </div>
