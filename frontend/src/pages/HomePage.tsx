@@ -7,19 +7,59 @@ import { Category, Product } from '../types';
 import api from '../utils/api';
 
 const HomePage = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [featured, setFeatured] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [heroImageIndex, setHeroImageIndex] = useState(0);
+  // Page state
+  const [categories, setCategories] = useState<Category[]>([]); // category list shown in hero section
+  const [featured, setFeatured] = useState<Product[]>([]); // featured products shown on home page
+  const [loading, setLoading] = useState(true); // loading spinner state while data is fetched
+  const [heroImageIndex, setHeroImageIndex] = useState(0); // active hero image index
+
+  // Positions for the floating hero star animation
+  const heroStars = [
+    { left: '6%', top: '12%', size: '11px', duration: 20, delay: 0 },
+    { left: '18%', top: '6%', size: '9px', duration: 22, delay: 1 },
+    { left: '30%', top: '16%', size: '10px', duration: 19, delay: 0.8 },
+    { left: '45%', top: '8%', size: '12px', duration: 21, delay: 1.3 },
+    { left: '62%', top: '14%', size: '8px', duration: 17, delay: 0.4 },
+    { left: '78%', top: '10%', size: '9px', duration: 20, delay: 1.8 },
+    { left: '12%', top: '30%', size: '7px', duration: 18, delay: 0.2 },
+    { left: '24%', top: '28%', size: '10px', duration: 20, delay: 0.6 },
+    { left: '38%', top: '26%', size: '8px', duration: 23, delay: 0.9 },
+    { left: '53%', top: '30%', size: '11px', duration: 18, delay: 1.1 },
+    { left: '70%', top: '32%', size: '7px', duration: 19, delay: 0.7 },
+    { left: '86%', top: '28%', size: '9px', duration: 22, delay: 0.3 },
+    { left: '15%', top: '48%', size: '8px', duration: 21, delay: 0.5 },
+    { left: '32%', top: '44%', size: '12px', duration: 19, delay: 1.2 },
+    { left: '48%', top: '52%', size: '7px', duration: 18, delay: 0.9 },
+    { left: '63%', top: '48%', size: '10px', duration: 20, delay: 1.4 },
+    { left: '80%', top: '50%', size: '9px', duration: 22, delay: 0.2 },
+    { left: '55%', top: '18%', size: '8px', duration: 19, delay: 1.0 },
+    { left: '92%', top: '18%', size: '9px', duration: 20, delay: 0.6 },
+    { left: '5%', top: '55%', size: '8px', duration: 21, delay: 1.5 },
+    { left: '88%', top: '45%', size: '10px', duration: 18, delay: 0.9 },
+    { left: '94%', top: '38%', size: '7px', duration: 21, delay: 1.2 },
+    { left: '82%', top: '62%', size: '8px', duration: 20, delay: 0.5 },
+    { left: '70%', top: '70%', size: '10px', duration: 19, delay: 1.0 },
+    { left: '92%', top: '72%', size: '9px', duration: 22, delay: 0.8 },
+    { left: '64%', top: '64%', size: '8px', duration: 18, delay: 1.4 },
+    { left: '76%', top: '58%', size: '7px', duration: 23, delay: 0.3 },
+    { left: '90%', top: '22%', size: '10px', duration: 20, delay: 1.1 },
+    { left: '82%', top: '24%', size: '7px', duration: 21, delay: 0.2 },
+    { left: '96%', top: '16%', size: '8px', duration: 19, delay: 0.7 },
+    { left: '50%', top: '8%', size: '9px', duration: 24, delay: 1.3 }
+  ];
 
   // Hero images array - using local images from public folder
   const heroImages = [
     '/images/hero-products/shopping-cart.png',    // Shopping cart image
     '/images/hero-products/fresh-basket.png',     // Fresh produce basket
-    '/images/hero-products/shopping-app.png'      // Mobile shopping app
+    '/images/hero-products/shopping-app.png',      // Mobile shopping app
+    '/images/hero-products/spice-mix.png',        // Spice mix image
+    '/images/hero-products/drinks-bundle.png',    // Drinks bundle image
+    '/images/hero-products/chocolate-cake.png'    // Chocolate cake image
   ];
 
-  // Rotate images every 4 seconds
+  // Automatically rotate the hero image carousel every 4 seconds
+
   useEffect(() => {
     const interval = setInterval(() => {
       setHeroImageIndex((prev) => (prev + 1) % heroImages.length);
@@ -46,31 +86,63 @@ const HomePage = () => {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 page-enter">
       <Navbar />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-ceylon-600 via-ceylon-500 to-amber-500 dark:from-ceylon-800 dark:via-ceylon-700 dark:to-amber-800 pt-24 pb-20">
-        {/* Batik pattern overlay */}
+      {/* Hero section: tagline, CTA, floating stars, and rotating hero images */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-ceylon-600 via-ceylon-500 to-amber-500 dark:from-ceylon-800 dark:via-ceylon-700 dark:to-amber-800 hero-bg-animate pt-24 pb-20">
+        {/* Decorative overlays used for hero background texture */}
         <div className="absolute inset-0 bg-batik opacity-30" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent" />
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -left-20 -top-12 w-72 h-72 rounded-full bg-white/10 blur-3xl animate-blob" />
+          <div className="absolute right-10 top-24 w-60 h-60 rounded-full bg-yellow-300/20 blur-3xl animate-blob" />
+          <div className="absolute left-1/2 top-1/3 w-52 h-52 rounded-full bg-white/20 blur-3xl animate-blob" />
+
+          {/* Floating hero stars animated across the hero section */}
+          <div className="absolute inset-0">
+            {heroStars.map((star, index) => (
+              <div
+                key={index}
+                className="floating-star"
+                style={{
+                  left: star.left,
+                  top: star.top,
+                  width: star.size,
+                  height: star.size,
+                  animationDuration: `${star.duration}s, 3.5s`,
+                  animationDelay: `${star.delay}s, ${star.delay / 2}s`
+                }}
+              />
+            ))}
+          </div>
+        </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center gap-12">
           <div className="flex-1 text-white text-center lg:text-left">
             <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mb-6">
               <span className="animate-bounce-gentle">🛺</span> Free delivery on orders over Rs. 2,000
             </div>
+
             <h1 className="font-display text-5xl sm:text-6xl font-bold leading-tight mb-4">
-              Fresh from the<br />
-              <span className="text-yellow-300">Heart of Ceylon</span>
-            </h1>
+           Purely Sri Lankan,<br />
+           <span className="text-yellow-300">Directly to Your Door</span>
+           </h1>
+
             <p className="text-white/85 text-lg max-w-md mb-8 leading-relaxed">
               Shop authentic Sri Lankan groceries, spices, sweets, and fresh produce — delivered to your door.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-              <Link to="/shop" className="bg-white text-ceylon-600 font-bold px-8 py-3.5 rounded-2xl hover:bg-yellow-50 transition-colors shadow-lg hover:shadow-xl active:scale-95">
-                Shop Now 🛒
+
+            <div className="flex flex-col gap-3 justify-center lg:justify-start">
+              {/* Primary hero CTA button */}
+              <Link to="/shop" className="group relative inline-flex items-center justify-center px-6 py-3 font-bold text-white transition-all duration-200 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl hover:bg-white/20 active:scale-95 shadow-lg">
+                <span className="relative flex items-center gap-2">
+                  Shop Now
+                  <span className="transition-transform duration-200 group-hover:translate-x-1">🛒</span>
+                </span>
               </Link>
-              <Link to="/shop/spices" className="border-2 border-white/60 text-white font-semibold px-8 py-3.5 rounded-2xl hover:bg-white/10 transition-colors">
-                Explore Spices
-              </Link>
+
+              {/* Supporting hero copy below CTA */}
+              <p className="text-sm text-white/80 max-w-md">
+                Discover fresh spices, local produce, and authentic Sri Lankan ingredients in one place.
+              </p>
             </div>
           </div>
 
@@ -136,7 +208,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Stats banner */}
+      {/* Stats banner showing brand highlights */}
       <section className="bg-white dark:bg-gray-800 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5 grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
@@ -156,7 +228,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Categories */}
+      {/* Category tiles: list of product categories pulled from the backend */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
         <div className="flex items-center justify-between mb-8">
           <div>
@@ -199,7 +271,7 @@ const HomePage = () => {
         )}
       </section>
 
-      {/* Featured products */}
+      {/* Featured products section with top product cards */}
       <section className="bg-white dark:bg-gray-800/50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between mb-8">
