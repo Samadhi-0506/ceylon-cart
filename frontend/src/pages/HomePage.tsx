@@ -10,6 +10,22 @@ const HomePage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [featured, setFeatured] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [heroImageIndex, setHeroImageIndex] = useState(0);
+
+  // Hero images array - using local images from public folder
+  const heroImages = [
+    '/images/hero-products/shopping-cart.png',    // Shopping cart image
+    '/images/hero-products/fresh-basket.png',     // Fresh produce basket
+    '/images/hero-products/shopping-app.png'      // Mobile shopping app
+  ];
+
+  // Rotate images every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHeroImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const fetch = async () => {
@@ -58,15 +74,57 @@ const HomePage = () => {
             </div>
           </div>
 
-          {/* Floating emoji cards */}
-          <div className="flex-1 grid grid-cols-3 gap-3 max-w-sm mx-auto">
-            {['🥥', '🌶️', '🍵', '🌾', '🍍', '🧁', '🥛', '🫚', '🍌'].map((emoji, i) => (
-              <div key={i}
-                style={{ animationDelay: `${i * 0.1}s` }}
-                className="bg-white/20 backdrop-blur-sm rounded-2xl aspect-square flex items-center justify-center text-3xl hover:bg-white/30 hover:scale-110 transition-all duration-300 cursor-default animate-fade-in">
-                {emoji}
+          {/* Animated single hero image carousel */}
+          <div className="flex-1 flex justify-center items-center max-w-sm mx-auto">
+            <div className="relative w-full aspect-square">
+              {/* Image container with fade animation */}
+              <div className="relative w-full h-full rounded-3xl overflow-hidden bg-gradient-to-br from-ceylon-100 to-amber-100 dark:from-ceylon-900/30 dark:to-amber-900/30 shadow-2xl">
+                {heroImages.map((img, i) => (
+                  <img
+                    key={i}
+                    src={img}
+                    alt={`Product showcase ${i + 1}`}
+                    className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out ${
+                      i === heroImageIndex
+                        ? 'opacity-100 scale-100'
+                        : 'opacity-0 scale-105'
+                    }`}
+                  />
+                ))}
+                {/* Overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
               </div>
-            ))}
+
+              {/* Carousel indicators */}
+              <div className="flex justify-center gap-2 mt-4">
+                {heroImages.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setHeroImageIndex(i)}
+                    className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                      i === heroImageIndex
+                        ? 'bg-white w-8 shadow-lg'
+                        : 'bg-white/40 hover:bg-white/60 w-2'
+                    }`}
+                    aria-label={`Go to image ${i + 1}`}
+                  />
+                ))}
+              </div>
+
+              {/* Side navigation arrows */}
+              <button
+                onClick={() => setHeroImageIndex((prev) => (prev - 1 + heroImages.length) % heroImages.length)}
+                className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 backdrop-blur-sm text-white p-2 rounded-full transition-all z-10 hidden sm:flex items-center justify-center"
+              >
+                ←
+              </button>
+              <button
+                onClick={() => setHeroImageIndex((prev) => (prev + 1) % heroImages.length)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 backdrop-blur-sm text-white p-2 rounded-full transition-all z-10 hidden sm:flex items-center justify-center"
+              >
+                →
+              </button>
+            </div>
           </div>
         </div>
 
