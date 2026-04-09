@@ -279,30 +279,7 @@ const HomePage = () => {
         </section>
       </FadeIn>
 
-      {/* ── SPLIT BANNERS ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {[
-            { img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80', tag: 'AUTHENTIC', title: 'Premium Spices', sub: 'Pure, unblended, export-quality', link: '/shop/spices', color: 'from-red-900/90 to-orange-800/60' },
-            { img: 'https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=800&q=80', tag: 'FARM FRESH', title: 'Dairy & Eggs', sub: 'Delivered fresh every morning', link: '/shop/dairy', color: 'from-blue-900/90 to-indigo-700/60' },
-          ].map((b, i) => (
-            <FadeIn key={i} delay={i * 0.15}>
-              <Link to={b.link} className="group relative block rounded-3xl overflow-hidden h-56 sm:h-64 shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
-                <img src={b.img} alt={b.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onError={e => { (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400'; }} />
-                <div className={`absolute inset-0 bg-gradient-to-t ${b.color}`} />
-                <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                  <span className="text-white/60 text-xs font-bold tracking-widest uppercase mb-1">{b.tag}</span>
-                  <h3 className="text-white font-display font-bold text-2xl">{b.title}</h3>
-                  <p className="text-white/70 text-sm mt-1 mb-2">{b.sub}</p>
-                  <div className="text-ceylon-300 text-sm font-semibold group-hover:text-ceylon-200 flex items-center gap-1 transition-colors">
-                    Shop now <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
-                  </div>
-                </div>
-              </Link>
-            </FadeIn>
-          ))}
-        </div>
-      </section>
+      
 
       {/* ── CTA BANNER ── */}
       <FadeIn>
