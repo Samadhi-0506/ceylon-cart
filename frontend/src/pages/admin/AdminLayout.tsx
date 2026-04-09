@@ -33,8 +33,8 @@ const AdminLayout = () => {
         {/* Logo */}
         <div className="p-5 border-b border-gray-100 dark:border-gray-700">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 bg-gradient-to-br from-ceylon-400 to-ceylon-600 rounded-xl flex items-center justify-center shadow">
-              <span className="text-xl">🥥</span>
+            <div className="w-9 h-9 rounded-xl overflow-hidden shadow ring-1 ring-ceylon-400/30 bg-white/10">
+              <img src="images/hero-products/ceylon-cart-logo.png" alt="CeylonCart logo" className="w-full h-full object-cover" />
             </div>
             <div>
               <div>
