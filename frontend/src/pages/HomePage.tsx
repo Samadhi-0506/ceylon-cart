@@ -181,42 +181,48 @@ const HomePage = () => {
       </section>
 
       {/* ── CATEGORIES ── */}
+      {/* Categories */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
-        <FadeIn>
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <p className="text-ceylon-500 font-semibold text-sm uppercase tracking-widest mb-2">What are you looking for?</p>
-              <h2 className="font-display text-4xl font-bold text-gray-900 dark:text-white">Shop by Category</h2>
-            </div>
-            <Link to="/shop" className="hidden sm:flex items-center gap-1 text-sm font-semibold text-ceylon-600 dark:text-ceylon-400 hover:gap-2 transition-all">View All →</Link>
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h2 className="font-display text-3xl font-bold text-gray-900 dark:text-white">Shop by Category</h2>
+            <p className="text-gray-500 dark:text-gray-400 mt-1">Explore our fresh Sri Lankan product categories</p>
           </div>
-        </FadeIn>
+          <Link to="/shop" className="text-ceylon-600 dark:text-ceylon-400 font-semibold hover:underline text-sm hidden sm:block">View All →</Link>
+        </div>
+
         {loading ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">{[...Array(8)].map((_, i) => <div key={i} className="aspect-[3/4] bg-gray-200 dark:bg-gray-700 rounded-3xl animate-pulse" />)}</div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="aspect-[4/3] bg-gray-200 dark:bg-gray-700 rounded-2xl animate-pulse" />
+            ))}
+          </div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {categories.map((cat, i) => {
-              const v = CAT_VISUALS[cat.slug] || { img: cat.image, gradient: 'from-gray-900/80 to-gray-500/40' };
-              return (
-                <FadeIn key={cat._id} delay={i * 0.07}>
-                  <Link to={`/shop/${cat.slug}`} className="group relative block aspect-[3/4] rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-                    <img src={v.img || cat.image} alt={cat.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onError={e => { (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400'; }} />
-                    <div className={`absolute inset-0 bg-gradient-to-t ${v.gradient} group-hover:opacity-90 transition-opacity`} />
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <div className="text-3xl mb-1.5 group-hover:scale-125 transition-transform duration-300 inline-block">{cat.icon}</div>
-                      <h3 className="text-white font-bold text-base leading-tight">{cat.name}</h3>
-                    </div>
-                    <div className="absolute top-3 right-3 bg-white/0 group-hover:bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/0 group-hover:border-white/40 transition-all duration-300 opacity-0 group-hover:opacity-100">
-                      Shop →
-                    </div>
-                  </Link>
-                </FadeIn>
-              );
-            })}
+            {categories.map((cat, i) => (
+              <Link key={cat._id} to={`/shop/${cat.slug}`}
+                style={{ animationDelay: `${i * 0.06}s` }}
+                className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer animate-fade-in">
+                <img
+                  src={cat.image || 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400'}
+                  alt={cat.name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  onError={e => { (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400'; }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <div className="text-2xl mb-1">{cat.icon}</div>
+                  <h3 className="text-white font-bold text-sm sm:text-base leading-tight">{cat.name}</h3>
+                  <p className="text-white/70 text-xs mt-0.5 hidden sm:block">{cat.description.slice(0, 40)}...</p>
+                </div>
+                <div className="absolute top-3 right-3 bg-white/20 backdrop-blur-sm rounded-full px-2.5 py-0.5 text-white text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                  Shop →
+                </div>
+              </Link>
+            ))}
           </div>
         )}
       </section>
-
       {/* ── PROMO BANNERS ── */}
       <section className="bg-gray-100 dark:bg-gray-800/60 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -278,29 +284,7 @@ const HomePage = () => {
           </div>
         </section>
       </FadeIn>
-
       
-
-      {/* ── CTA BANNER ── */}
-      <FadeIn>
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-20">
-          <div className="relative overflow-hidden rounded-3xl">
-            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1400&q=80" alt="Fresh groceries" className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-r from-ceylon-700/95 to-ceylon-500/85" />
-            <div className="absolute inset-0 bg-batik opacity-10" />
-            <div className="relative px-8 sm:px-16 py-16 text-center text-white">
-              <div className="text-5xl mb-4" style={{ animation: 'bounceGentle 1.2s ease-in-out infinite alternate' }}>🎉</div>
-              <h2 className="font-display text-3xl sm:text-5xl font-bold mb-3">New Customer?</h2>
-              <p className="text-white/85 text-lg mb-2">Register today and get <span className="font-bold text-yellow-300">10% off</span> your first order</p>
-              <p className="text-white/60 text-sm mb-8">Use code <span className="font-bold bg-white/20 px-2 py-0.5 rounded font-mono">WELCOME10</span> at checkout</p>
-              <Link to="/register" className="inline-block bg-white text-ceylon-700 font-bold px-10 py-4 rounded-2xl hover:bg-yellow-50 transition-colors shadow-xl active:scale-95 text-lg">
-                Create Free Account →
-              </Link>
-            </div>
-          </div>
-        </section>
-      </FadeIn>
-
       <Footer />
 
       <style>{`

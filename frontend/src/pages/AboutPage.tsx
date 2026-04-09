@@ -102,26 +102,25 @@ const AboutPage = () => (
           </div>
         </FadeIn>
 
-        <FadeIn delay={0.2}>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-4">
-              <div className="rounded-3xl overflow-hidden aspect-[4/5] shadow-xl">
-                <img src="https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=400&q=80" alt="Fresh vegetables" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
-              </div>
-              <div className="rounded-3xl overflow-hidden aspect-square shadow-xl">
-                <img src="https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=400&q=80" alt="Spices" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
-              </div>
-            </div>
-            <div className="space-y-4 mt-8">
-              <div className="rounded-3xl overflow-hidden aspect-square shadow-xl">
-                <img src="https://images.unsplash.com/photo-1546961342-ea5f62d3a27b?w=400&q=80" alt="King coconut" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
-              </div>
-              <div className="rounded-3xl overflow-hidden aspect-[4/5] shadow-xl">
-                <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&q=80" alt="Ceylon tea" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
-              </div>
-            </div>
-          </div>
-        </FadeIn>
+<FadeIn delay={0.2}>
+  <div className="flex justify-center items-center py-6 px-4">
+    <div className="relative group max-w-md w-full">
+      <div className="absolute -inset-1 bg-gradient-to-r from-ceylon-400/30 to-amber-400/30 rounded-[2rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-0"></div>
+
+      <div className="relative z-10 bg-transparent rounded-[2rem] overflow-hidden shadow-2xl transition-all duration-500">
+        <img 
+          src="/images/hero-products/girl.png" 
+          alt="Authentic Sri Lankan Produce" 
+          className="w-full h-auto object-contain transform hover:scale-105 transition-transform duration-500 ease-out" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+      </div>
+      <div className="absolute -top-2 -left-2 bg-ceylon-500 text-white p-2 rounded-full shadow-lg z-20 animate-bounce text-xs">
+        🍃
+      </div>
+    </div>
+  </div>
+</FadeIn>
       </div>
     </section>
 
@@ -177,26 +176,7 @@ const AboutPage = () => (
       </div>
     </section>
 
-    {/* ── WIDE PHOTO BANNER ── */}
-    <FadeIn>
-      <section className="relative overflow-hidden h-64 sm:h-80">
-        <img src="https://images.unsplash.com/photo-1547825407-2d060104b7f8?w=1600&q=80" alt="Ceylon landscape" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-transparent" />
-        <div className="absolute inset-0 flex items-center px-8 sm:px-20">
-          <div>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-4">Ready to taste Ceylon?</h2>
-            <div className="flex flex-wrap gap-3">
-              <Link to="/shop" className="bg-amber-500 hover:bg-amber-600 text-white font-bold px-7 py-3 rounded-2xl transition-all shadow-lg active:scale-95">
-                Start Shopping →
-              </Link>
-              <Link to="/contact" className="bg-white/15 border border-white/40 text-white font-semibold px-7 py-3 rounded-2xl hover:bg-white/25 transition-all active:scale-95">
-                Contact Us
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </FadeIn>
+    
 
     <Footer />
   </div>
