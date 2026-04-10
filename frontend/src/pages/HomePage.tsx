@@ -223,33 +223,7 @@ const HomePage = () => {
           </div>
         )}
       </section>
-      {/* ── PROMO BANNERS ── */}
-      <section className="bg-gray-100 dark:bg-gray-800/60 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <FadeIn><div className="mb-10"><p className="text-ceylon-500 font-semibold text-sm uppercase tracking-widest mb-2">This Week</p><h2 className="font-display text-4xl font-bold text-gray-900 dark:text-white">Hot Picks 🔥</h2></div></FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            {PROMO_BANNERS.map((b, i) => (
-              <FadeIn key={i} delay={i * 0.12}>
-                <Link to={b.link} className={`group relative block rounded-3xl overflow-hidden aspect-[4/3] bg-gradient-to-br ${b.color} shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1`}>
-                  <img src={b.img} alt={b.title} className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-55 group-hover:scale-105 transition-all duration-700" onError={e => { (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400'; }} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                  <div className="absolute inset-0 p-5 flex flex-col justify-between">
-                    <span className="inline-block bg-white/20 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-full border border-white/30 w-fit">{b.tag}</span>
-                    <div>
-                      <h3 className="text-white font-display font-bold text-xl leading-tight mb-1">{b.title}</h3>
-                      <p className="text-white/70 text-sm mb-3">{b.sub}</p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-white font-bold text-lg">{b.badge}</span>
-                        <span className="bg-white text-gray-900 text-xs font-bold px-3 py-1.5 rounded-xl group-hover:bg-ceylon-400 group-hover:text-white transition-colors">Shop Now →</span>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
+      
 
       {/* ── FEATURED PRODUCTS ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
