@@ -60,6 +60,10 @@ const INFO_CARDS = [
     ),
     title: 'Visit Us',
     lines: ['123 Galle Road, Colombo 03', 'Western Province, Sri Lanka'],
+    bgColor: 'bg-amber-50 dark:bg-amber-950/30',
+    borderColor: 'border-amber-100 dark:border-amber-900/40',
+    hoverBorder: 'hover:border-amber-400 dark:hover:border-amber-500',
+    iconBg: 'bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 group-hover:bg-amber-500',
   },
   {
     icon: (
@@ -69,6 +73,10 @@ const INFO_CARDS = [
     ),
     title: 'Call Us',
     lines: ['+94 11 234 5678', '+94 77 890 1234', 'Mon–Sat 8am–8pm'],
+    bgColor: 'bg-emerald-50 dark:bg-emerald-950/30',
+    borderColor: 'border-emerald-100 dark:border-emerald-900/40',
+    hoverBorder: 'hover:border-emerald-400 dark:hover:border-emerald-500',
+    iconBg: 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 group-hover:bg-emerald-500',
   },
   {
     icon: (
@@ -78,6 +86,10 @@ const INFO_CARDS = [
     ),
     title: 'Email Us',
     lines: ['hello@ceyloncart.lk', 'support@ceyloncart.lk'],
+    bgColor: 'bg-sky-50 dark:bg-sky-950/30',
+    borderColor: 'border-sky-100 dark:border-sky-900/40',
+    hoverBorder: 'hover:border-sky-400 dark:hover:border-sky-500',
+    iconBg: 'bg-sky-50 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400 group-hover:bg-sky-500',
   },
   {
     icon: (
@@ -87,6 +99,10 @@ const INFO_CARDS = [
     ),
     title: 'Hours',
     lines: ['Monday – Friday: 8am – 9pm', 'Saturday: 8am – 8pm', 'Sunday: 10am – 6pm'],
+    bgColor: 'bg-violet-50 dark:bg-violet-950/30',
+    borderColor: 'border-violet-100 dark:border-violet-900/40',
+    hoverBorder: 'hover:border-violet-400 dark:hover:border-violet-500',
+    iconBg: 'bg-violet-50 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400 group-hover:bg-violet-500',
   },
 ];
 
@@ -175,32 +191,32 @@ const ContactPage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {INFO_CARDS.map((card, i) => (
             <FadeIn key={i} delay={i * 0.1} direction="up">
-              <div className="group relative bg-white dark:bg-gray-800 rounded-2xl p-6
-                              border border-ceylon-100 dark:border-ceylon-900/40
-                              hover:border-ceylon-400 dark:hover:border-ceylon-500
-                              hover:shadow-xl hover:shadow-ceylon-100/60 dark:hover:shadow-ceylon-900/30
-                              hover:-translate-y-2 transition-all duration-300 overflow-hidden">
+              <div className={`group relative rounded-2xl p-6
+                              ${card.bgColor}
+                              border ${card.borderColor}
+                              ${card.hoverBorder}
+                              hover:shadow-xl hover:shadow-${card.bgColor.split(' ')[0].replace('bg-', '')}/60
+                              hover:-translate-y-2 transition-all duration-300 overflow-hidden`}>
 
                 {/* Subtle colored top-left glow on hover */}
-                <div className="absolute -top-6 -left-6 w-20 h-20 bg-ceylon-400/0 group-hover:bg-ceylon-400/10 rounded-full blur-2xl transition-all duration-500" />
+                <div className="absolute -top-6 -left-6 w-20 h-20 bg-current opacity-0 group-hover:opacity-10 rounded-full blur-2xl transition-all duration-500" />
 
-                {/* Icon with ceylon color background */}
-                <div className="w-12 h-12 rounded-xl bg-ceylon-50 dark:bg-ceylon-900/30
-                                text-ceylon-600 dark:text-ceylon-400
+                {/* Icon with colored background */}
+                <div className={`w-12 h-12 rounded-xl ${card.iconBg}
                                 flex items-center justify-center mb-4
-                                group-hover:bg-ceylon-500 group-hover:text-white
-                                transition-all duration-300 shadow-sm">
+                                group-hover:text-white
+                                transition-all duration-300 shadow-sm`}>
                   {card.icon}
                 </div>
 
-                <h3 className="font-bold text-gray-900 dark:text-white mb-2.5 text-base
-                               group-hover:text-ceylon-600 dark:group-hover:text-ceylon-400
-                               transition-colors">
+                <h3 className={`font-bold mb-2.5 text-base
+                               group-hover:${card.iconBg.split(' ')[2].replace('text-', 'text-')}
+                               transition-colors`}>
                   {card.title}
                 </h3>
 
                 {card.lines.map((line, j) => (
-                  <p key={j} className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{line}</p>
+                  <p key={j} className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{line}</p>
                 ))}
 
                 {/* Bottom accent line that slides in on hover */}
