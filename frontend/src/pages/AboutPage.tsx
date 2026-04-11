@@ -52,7 +52,8 @@ const AboutPage = () => (
     <Navbar />
 
     {/* ── HERO ── */}
-    <section className="relative overflow-hidden pt-16">
+    {/* Changed from pt-16 to pt-0 to eliminate space between navbar and hero image */}
+    <section className="relative overflow-hidden pt-0">
       <div className="relative h-72 sm:h-96">
         <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1400&q=80" alt="Sri Lankan market" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/50 to-black/20" />
